@@ -40,3 +40,15 @@ class ProductCrud(ViewSet):
             return Response({'update':'data update successfully'})
         else:
             return Response({'failed':'data not updated'})
+        
+    def partial_update(self,request,pk):
+        PPO=Product.objects.get(ProductId=pk)
+        PSO=request.data
+        JDO=ProductModelserializers(PPO,data=PSO,partial=True)
+
+        if JDO.is_valid():
+            JDO.save()
+            return Response({'update':'data update successfully'})
+        else:
+            return Response({'failed':'data not updated'})
+        
