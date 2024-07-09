@@ -20,3 +20,12 @@ class ProductCrud(ViewSet):
         POD=Product.objects.get(ProductId=pk)
         JO=ProductModelserializers(POD)
         return Response(JO.data)
+    
+    def create(self,request):
+        JDO=request.data
+        PDO=ProductModelserializers(data=JDO)
+        if PDO.is_valid():
+            PDO.save()
+            return Response({'create':'data create successfully'})
+        else:
+            return Response({'failed':'invalid data'})
