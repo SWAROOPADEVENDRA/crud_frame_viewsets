@@ -51,4 +51,8 @@ class ProductCrud(ViewSet):
             return Response({'update':'data update successfully'})
         else:
             return Response({'failed':'data not updated'})
-        
+    
+    def delete(self,request,pk):
+        PDP=Product.objects.get(ProductId=pk)
+        PDP.delete()
+        return Response({'delete':'data is deleted successfully'})
